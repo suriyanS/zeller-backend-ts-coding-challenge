@@ -1,5 +1,8 @@
 import { ProductInfo } from "./interfaces/product-info";
 
+/**
+ * A class that represents for product checkout with quantity
+ */
 export class CheckOutProduct implements ProductInfo {
     sku: string;
     name: string;

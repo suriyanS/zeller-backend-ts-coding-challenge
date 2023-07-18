@@ -5,6 +5,9 @@ import {
 } from "../enums/commons";
 import { Product } from "../models/product";
 
+/**
+ * System store catalogue that holds the available product details
+ */
 export const STORE_CATALOGUE: Map<string, Product> = new Map();
 STORE_CATALOGUE.set(Products.IPD, {
   sku: Products.IPD,

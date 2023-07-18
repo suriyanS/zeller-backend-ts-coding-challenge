@@ -1,6 +1,9 @@
 import { Offers, Products } from "../enums/commons";
 import { Offer } from "../models/offer";
 
+/**
+ * Default pricing rule constant with product and offer details
+ */
 export const PRICING_RULES: Map<string, Offer[]> = new Map();
 PRICING_RULES.set(Products.ATV, [
   {

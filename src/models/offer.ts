@@ -1,5 +1,8 @@
 import { OfferInfo } from "./interfaces/offer-info";
 
+/**
+ * A class that represents the common offer details that covers all offers at the moment
+ */
 export class Offer implements OfferInfo {
   code: string;
   percentage: number;
