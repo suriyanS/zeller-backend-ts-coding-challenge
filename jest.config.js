@@ -10,6 +10,6 @@ module.exports = {
       statements: 90,
     },
   },
-  coverageReporters: ["json-summary"],
+  coverageReporters: ["json-summary", "text", "lcov"],
   testMatch: ["<rootDir>/__tests__/**/*.test.ts"],
 };
