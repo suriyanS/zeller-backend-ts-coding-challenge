@@ -20,6 +20,13 @@ The following opening day specials are available:
 - 3 for 2 deal on Apple TVs (SKU: atv). If you buy 3 Apple TVs, you will pay the price of 2 only.
 - Bulk discount on Super iPads (SKU: ipd). The price will drop to $499.99 each if someone buys more than 4.
 
+## Unit Test & Code Coverage
+
+![Branches](./coverage/badge-branches.svg)
+![Functions](./coverage/badge-functions.svg)
+![Lines](./coverage/badge-lines.svg)
+![Statements](./coverage/badge-statements.svg)
+
 ## Author
 
 This project was built by Suriyan Selvaraj.
