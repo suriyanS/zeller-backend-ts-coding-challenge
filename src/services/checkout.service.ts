@@ -4,7 +4,7 @@ import { CheckOutProduct } from "../models/checkout-product";
 import { Offer } from "../models/offer";
 
 export class CheckOutService {
-  private productList: CheckOutProduct[] = [];
+  public productList: CheckOutProduct[] = [];
   constructor(public pricingRules: Map<string, Offer[]>) {}
 
   public cancel(): void {
@@ -13,16 +13,20 @@ export class CheckOutService {
 
   public scan(sku: string) {
     const quantity = 1;
-    const product = this.getProduct(sku);
-    const existingProductIndex = this.productList.findIndex(
-      (p) => p.sku === sku
-    );
+    try {
+      const product = this.getProduct(sku);
+      const existingProductIndex = this.productList.findIndex(
+        (p) => p.sku === sku
+      );
 
-    if (existingProductIndex !== -1) {
-      this.productList[existingProductIndex].quantity += quantity;
-    } else {
-      product.quantity = quantity;
-      this.productList.push(product);
+      if (existingProductIndex !== -1) {
+        this.productList[existingProductIndex].quantity += quantity;
+      } else {
+        product.quantity = quantity;
+        this.productList.push(product);
+      }
+    } catch (error: any) {
+      throw new Error(error.message);
     }
   }
 
@@ -49,7 +53,7 @@ export class CheckOutService {
               totalDiscount += this.calculatePercentageDiscount(product, offer);
               break;
             case Offers.FIXED_AMOUNT_DISCOUNT:
-              totalDiscount += this.calculateFixedDiscount(product, offer);
+              totalDiscount += this.calculateFixedDiscount(offer);
               break;
             case Offers.BUY_X_GET_Y_DISCOUNT:
               totalDiscount += this.calculateBuyXGetYDiscount(product, offer);
@@ -73,11 +77,8 @@ export class CheckOutService {
     return product.price * product.quantity * (offer.percentage / 100);
   }
 
-  private calculateFixedDiscount(
-    product: CheckOutProduct,
-    offer: Offer
-  ): number {
-    return product.price * product.quantity - offer.discountPrice;
+  private calculateFixedDiscount(offer: Offer): number {
+    return offer.discountPrice;
   }
 
   private calculateBuyXGetYDiscount(

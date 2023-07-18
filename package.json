@@ -7,7 +7,9 @@
     "build": "tsc",
     "debug": "ts-node-dev src/index.ts",
     "start": "tsc && node dist/index.js",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:report": "jest --coverage"
   },
   "repository": {
     "type": "git",
