@@ -1,16 +1,15 @@
 import { Products, Offers } from "../../src/enums/commons";
-import { Offer } from "../../src/models/offer";
+import { OfferInfo } from "../../src/models/interfaces/offer-info";
 
-
-export const CUSTOM_PRICING_RULES: Map<string, Offer[]> = new Map();
+/**
+ * A constant that represents custom pricing rule for future scenarios test
+ */
+export const CUSTOM_PRICING_RULES: Map<string, OfferInfo[]> = new Map();
 CUSTOM_PRICING_RULES.set(Products.ATV, [
   {
     code: Offers.FIXED_AMOUNT_DISCOUNT,
     percentage: 0,
     discountPrice: 40,
-    buyQuantity: 0,
-    getQuantity: 0,
-    bulkQuantity: 0,
   },
 ]);
 CUSTOM_PRICING_RULES.set(Products.IPD, [
@@ -18,21 +17,19 @@ CUSTOM_PRICING_RULES.set(Products.IPD, [
     code: Offers.PERCENTAGE_DISCOUNT,
     percentage: 20,
     discountPrice: 0,
-    buyQuantity: 0,
-    getQuantity: 0,
-    bulkQuantity: 0,
   },
 ]);
 
-export const MOCK_PRICING_RULES_WITH_UNKNOWN_OFFER: Map<string, Offer[]> = new Map();
+/**
+ * A constant that represents mock pricing rule includes unknown offer for test
+ */
+export const MOCK_PRICING_RULES_WITH_UNKNOWN_OFFER: Map<string, OfferInfo[]> =
+  new Map();
 MOCK_PRICING_RULES_WITH_UNKNOWN_OFFER.set(Products.ATV, [
   {
     code: Offers.FIXED_AMOUNT_DISCOUNT,
     percentage: 0,
     discountPrice: 40,
-    buyQuantity: 0,
-    getQuantity: 0,
-    bulkQuantity: 0,
   },
 ]);
 MOCK_PRICING_RULES_WITH_UNKNOWN_OFFER.set(Products.IPD, [
@@ -40,8 +37,5 @@ MOCK_PRICING_RULES_WITH_UNKNOWN_OFFER.set(Products.IPD, [
     code: "unknown",
     percentage: 20,
     discountPrice: 0,
-    buyQuantity: 0,
-    getQuantity: 0,
-    bulkQuantity: 0,
   },
 ]);

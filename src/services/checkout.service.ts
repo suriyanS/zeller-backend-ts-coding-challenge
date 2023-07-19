@@ -1,7 +1,8 @@
 import { STORE_CATALOGUE } from "../constants/store-catalogue";
 import { Offers } from "../enums/commons";
 import { CheckOutProduct } from "../models/checkout-product";
-import { Offer } from "../models/offer";
+import { OfferInfo } from "../models/interfaces/offer-info";
+import { BulkOffer, QuantityOffer } from "../models/offer";
 
 /**
  * A Service class that represents for product(s) checkout system
@@ -14,7 +15,7 @@ export class CheckOutService {
    * Construct new instance for CheckoutService using pricingRules.
    * @param pricingRules - Based on this pricing rule calculation will be done.
    */
-  constructor(public pricingRules: Map<string, Offer[]>) {}
+  constructor(public pricingRules: Map<string, OfferInfo[]>) {}
 
   /**
    * Clear all products from the cart
@@ -81,10 +82,16 @@ export class CheckOutService {
               totalDiscount += this.calculateFixedDiscount(offer);
               break;
             case Offers.BUY_X_GET_Y_DISCOUNT:
-              totalDiscount += this.calculateBuyXGetYDiscount(product, offer);
+              totalDiscount += this.calculateBuyXGetYDiscount(
+                product,
+                offer as QuantityOffer
+              );
               break;
             case Offers.BULK_ORDER_DISCOUNT:
-              totalDiscount += this.calculateBulkOrderDiscount(product, offer);
+              totalDiscount += this.calculateBulkOrderDiscount(
+                product,
+                offer as BulkOffer
+              );
               break;
             default:
               break;
@@ -103,7 +110,7 @@ export class CheckOutService {
    */
   private calculatePercentageDiscount(
     product: CheckOutProduct,
-    offer: Offer
+    offer: OfferInfo
   ): number {
     return product.price * product.quantity * (offer.percentage / 100);
   }
@@ -113,7 +120,7 @@ export class CheckOutService {
    * @param offer - Applicable offer
    * @returns - Fixed discount amount
    */
-  private calculateFixedDiscount(offer: Offer): number {
+  private calculateFixedDiscount(offer: OfferInfo): number {
     return offer.discountPrice;
   }
 
@@ -125,7 +132,7 @@ export class CheckOutService {
    */
   private calculateBuyXGetYDiscount(
     product: CheckOutProduct,
-    offer: Offer
+    offer: QuantityOffer
   ): number {
     const applicableProductSet = Math.floor(
       product.quantity / offer.buyQuantity
@@ -146,7 +153,7 @@ export class CheckOutService {
    */
   private calculateBulkOrderDiscount(
     product: CheckOutProduct,
-    offer: Offer
+    offer: BulkOffer
   ): number {
     if (product.quantity > offer.bulkQuantity) {
       return (
